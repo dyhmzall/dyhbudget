@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Бюджет{% endblock %}
+
+{% block body %}
+    <h1>Бюджет</h1>
+
+    <div>{{ budget }}</div>
+
+    <table class="dyh-talbe">
+        <thead>
+        <tr>
+            <td>Раздел</td>
+            <td>Сумма</td>
+            <td>Потрачено</td>
+            <td>Осталось</td>
+            <td>Покупки</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for category in categories %}
+            <tr>
+                <td>{{ category.title }}</td>
+                <td>{{ category.amount }}</td>
+                <td>{{ category.amounts }}</td>
+                <td>{{ category.amount - category.amounts }}</td>
+                <td>
+                    <ul>
+                        {% for product in category.products %}
+                            <li>{{ product.title }} {{ product.amount }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        <tr>
+            <td></td>
+            <td>{{ totalAmount }}</td>
+            <td>{{ totalSpent }}</td>
+            <td>{{ totalAmount - totalSpent }}</td>
+            <td></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <style>
+        .dyh-talbe td {
+            border: 1px solid black;
+            padding: 5px;
+        }
+    </style>
+
+{% endblock %}
